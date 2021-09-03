@@ -7,7 +7,8 @@ export const useStyles = makeStyles({
     width: '100%',
   },
   form: {
-    margin: '10px',
-    width: '90%',
+    margin: '15px',
+    width: '95%',
+
   }
 })

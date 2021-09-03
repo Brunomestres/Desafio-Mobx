@@ -23,8 +23,8 @@ function Home() {
 
   return (
     <Card className={styles.cardPrimary}>
-      <FormControl className={styles.form}>
-        <TextField  label="Filmes" value={search} variant="outlined" onChange={(e) => setSearch(e.target.value)}/>
+      <FormControl className={styles.form} >
+        <TextField   label="Filmes" value={search} variant="outlined" onChange={(e) => setSearch(e.target.value)}/>
       </FormControl>
       <CardMovies search={search} store={store} />
     </Card>

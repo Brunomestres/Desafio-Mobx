@@ -19,13 +19,15 @@ function CardMovies(props: any) {
       await store.BuscarMovies(search, store.page);
       setMovies(store.movies);
     }
-    // console.log(props.store)
     load();
   }, [search, store.page ,store])
 
 
   return (
     <>
+    {store.loading ? <h1 style={{ marginLeft: '40%' }}> Carregando... </h1>
+      :
+      <>
         {movies && movies?.results.length > 0 ?
           <div>
             {movies.results.map( (movie) => (
@@ -43,10 +45,14 @@ function CardMovies(props: any) {
               <Pagination count={10} color="secondary" page={props.store.page}  onChange={handleChange} className={classes.paginationItem} />
             </div>
           </div>
-        :
-        <></>
-        }
-    </>
+          :
+          <></>
+          }
+      </>
+
+    }
+
+  </>
   )
 }
 

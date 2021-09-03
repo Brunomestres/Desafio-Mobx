@@ -7,16 +7,18 @@ export class Store {
   constructor(){
     makeObservable(this,
       {
+      loading:observable,
       page: observable,
       movies: observable,
       setMovies: action,
       setPage: action,
       BuscarMovies: action,
+      setLoading: action
     });
   }
 
   public page = 1;
-
+  public loading = false;
   public movies: Movie = {
     page: 0 ,
     results: [],
@@ -25,20 +27,36 @@ export class Store {
   };
 
 
-  setMovies(movies:Movie){
+  public setMovies(movies:Movie){
     this.movies = movies;
   }
 
-  setPage(pageNumber:number){
+  public setPage(pageNumber:number){
     this.page = pageNumber;
   }
 
+  public setLoading(loading:boolean){
+    this.loading = loading;
+  }
+
+
   async BuscarMovies(search:string){
+    if(this.loading){
+      return;
+    }
+
+    this.setLoading(true)
+
     try {
+
       const reponse = await api.get(`${search}&page=${this.page}`);
       this.setMovies(reponse.data);
     } catch (error) {
-      console.log(error)
+
+      console.log(error);
+
+    }finally{
+      this.setLoading(false);
     }
 
   }
